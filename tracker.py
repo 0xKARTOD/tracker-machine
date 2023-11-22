@@ -1,14 +1,28 @@
 import requests
 from dotenv import load_dotenv
 import os
-
+from threading import Thread
+from queue import Queue
 
 load_dotenv()
 ApiKeyToken = os.getenv('APIKEY')
 BASE_URL = 'https://api.etherscan.io/api?'
 
+def wrapper(func, queue):
+    queue.put(func())
+
 def aggregate_data():
-    return get_gas_price(), get_ethereum_price(), get_BTC_price(), get_BTC_gas()
+
+    funcs = [get_gas_price, get_ethereum_price, get_BTC_price, get_BTC_gas]
+    q = []
+    _return = []
+    for i in range(len(funcs)):
+        q.append(Queue())
+        Thread(target = wrapper, args=(funcs[i], q[i])).start() 
+
+    for i in range(len(q)):
+        _return.append(q[i].get())
+    return _return
 
 
 def get_gas_price():
