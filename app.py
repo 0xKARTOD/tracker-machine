@@ -106,8 +106,7 @@ class TrackerApp(object):
 
     def scrolling(self, sender):
         sender.state = not sender.state
-
-        self.scrolling_bool = True
+        self.scrolling_bool = not self.scrolling_bool
 
     def run(self):
         self.app.run()
