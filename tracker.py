@@ -10,6 +10,11 @@ load_dotenv()
 ApiKeyToken = os.getenv('APIKEY')
 BASE_URL = 'https://api.etherscan.io/api?'
 
+headerr = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+}
+
 def wrapper(func, queue):
     queue.put(func())
 
@@ -33,9 +38,8 @@ def aggregate_data():
 def get_gas_price():
 
     url = f'{BASE_URL}module=gastracker&action=gasoracle&apikey={ApiKeyToken} '
-    params = {}
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, headers = headerr)
     data = response.json()
     
     return data['result']['SafeGasPrice']
@@ -44,9 +48,8 @@ def get_gas_price():
 def get_ethereum_price():
 
     url = f'{BASE_URL}module=stats&action=ethprice&apikey={ApiKeyToken}'
-    params = {}
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, headers = headerr)
     data = response.json()
 
     return float(data['result']['ethusd'])
@@ -55,9 +58,8 @@ def get_ethereum_price():
 def get_BTC_gas():
 
     url = 'https://mempool.space/api/v1/fees/recommended'
-    params = {}
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, headers = headerr)
     data = response.json()
 
     return data['hourFee']
@@ -65,9 +67,8 @@ def get_BTC_gas():
 def get_BTC_price():
 
     url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd'
-    params = {}
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, headers = headerr)
     data = response.json()
 
     return float(data['bitcoin']['usd'])
