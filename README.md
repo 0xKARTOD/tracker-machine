@@ -24,8 +24,8 @@ Tracker machine is a tool that allows users to monitor and track the price of ga
 
 ## How to set up and run
 
-1. Create `settings.txt` file
-2. Put your etherscan API key there like `APIKEY = YOUR_API_KEY`
+1. Create `.evn` file (better to use .env than .txt files)
+2. Put your etherscan API key there like `APIKEY = "YOUR_API_KEY"`
 3. Run your app
 
 
