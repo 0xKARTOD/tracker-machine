@@ -1,12 +1,19 @@
 import requests
-from dotenv import load_dotenv
-import os
 from threading import Thread
 from queue import Queue
 
 
-load_dotenv()
-ApiKeyToken = os.getenv('APIKEY')
+def get_data_from_settings():
+
+    _data = open("settings.txt", "r").read().split(' ')
+
+    for i in range(len(_data)):
+        if _data[i] == 'APIKEY' and _data[i+1] == '=':
+            ApiKeyToken = _data[i+2]
+
+    return ApiKeyToken
+
+ApiKeyToken = get_data_from_settings()
 BASE_URL = 'https://api.etherscan.io/api?'
 
 headerr = {
