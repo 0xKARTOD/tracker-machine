@@ -33,6 +33,13 @@ Tracker machine is a tool that allows users to monitor and track the price of ga
 > All the libraries that were used are in the ***requirements.txt*** file
 
 Run via python:
+
 ```basg
 python3 app.py
+```
+
+Create MacOS app:
+
+```basg
+python3 setup.py py2app
 ```
