@@ -9,9 +9,9 @@ Tracker machine is a tool that allows users to monitor and track the price of ga
 - [x] Add Bitcoin network fees and BTC price
 - [x] UI for up/down trends
 - [x] Add automatic switch between metrics
-- [ ] Test for 10H
-- [ ] Optimize etherscan API data tracking
-- [ ] Add .exe runner
+- [x] Test for 10H
+- [x] Optimize etherscan API data tracking
+- [ ] Create an MacOS mini app
 - [ ] Add more networks
 
 

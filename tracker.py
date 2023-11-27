@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import os
 from threading import Thread
 from queue import Queue
-from datetime import datetime
 
 
 load_dotenv()
@@ -19,7 +18,6 @@ def wrapper(func, queue):
     queue.put(func())
 
 def aggregate_data():
-    print("Time before =", datetime.now().strftime("%H:%M:%S"))
 
     funcs = [get_gas_price, get_ethereum_price, get_BTC_price, get_BTC_gas]
     q = []
@@ -31,7 +29,6 @@ def aggregate_data():
     for i in range(len(q)):
         _return.append(q[i].get())
 
-    print("Time after =", datetime.now().strftime("%H:%M:%S"))
     return _return
 
 
