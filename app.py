@@ -2,6 +2,7 @@ import rumps
 
 from tracker import *
 
+from config import *
 
 class TrackerApp(object):
     def __init__(self):
@@ -32,7 +33,7 @@ class TrackerApp(object):
 
         self.app.menu = [self.gas_button, self.eth_button, self.btcgas_button, self.btc_button, None, self.scrolling_button, None]
 
-        self.app.icon = 'icon.jpg'
+        self.app.icon = icon
         self.process_timer.count = 0
 
         self.start_tracking = False
@@ -81,28 +82,36 @@ class TrackerApp(object):
 
     def setup_title(self):
         if self.flag == 'GAS':
-            self.app.title = f'⛽ Gas now: {self.gas} Gwei {self.gas_grow}'
+            self.app.icon = ethgas
+            self.app.title = f'Gas now: {self.gas} Gwei {self.gas_grow}'
         elif self.flag == 'ETH':
-            self.app.title = f'♢ETH now is {str(round(self.ETH, 2))}$ {self.eth_grow}'
+            self.app.icon = ethereum
+            self.app.title = f'ETH now is {str(round(self.ETH, 2))}$ {self.eth_grow}'
         elif self.flag == 'BTCGAS':
-            self.app.title = f'⛽ BTC Gas: {self.btc_gas} sat/vB {self.btc_grow}'
+            self.app.icon = btcgas
+            self.app.title = f'BTC Gas: {self.btc_gas} sat/vB {self.btc_grow}'
         elif self.flag == 'BTC':
-            self.app.title = f'₿ now is {self.BTC}$ {self.gasbtc_grow}'
+            self.app.icon = bitcoin
+            self.app.title = f'BTC now is {self.BTC}$ {self.gasbtc_grow}'
 
     def start_tracking(self, sender):
         self.app.icon = None
         if sender.title == self.config["gas"]:
             self.flag = 'GAS'
-            self.app.title = f'⛽ Gas now: {self.gas} Gwei {self.gas_grow}'
+            self.app.icon = ethgas
+            self.app.title = f'Gas now: {self.gas} Gwei {self.gas_grow}'
         elif sender.title == self.config["btcgas"]:
             self.flag = 'BTCGAS'
-            self.app.title = f'⛽ BTC Gas: {self.btc_gas} sat/vB {self.btc_grow}'
+            self.app.icon = btcgas
+            self.app.title = f'BTC Gas: {self.btc_gas} sat/vB {self.btc_grow}'
         elif sender.title == self.config["btc"]:
             self.flag = 'BTC'
-            self.app.title = f'₿ now is {self.BTC}$ {self.gasbtc_grow}'
+            self.app.icon = bitcoin
+            self.app.title = f'BTC now is {self.BTC}$ {self.gasbtc_grow}'
         elif sender.title == self.config["eth"]:
             self.flag = 'ETH'
-            self.app.title = f'♢ETH now is {str(round(self.ETH, 2))}$ {self.eth_grow}'
+            self.app.icon = ethereum
+            self.app.title = f'ETH now is {str(round(self.ETH, 2))}$ {self.eth_grow}'
 
     def scrolling(self, sender):
         sender.state = not sender.state

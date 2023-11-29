@@ -2,17 +2,8 @@ import requests
 from threading import Thread
 from queue import Queue
 
-from dotenv import load_dotenv
-import os
+from config import *
 
-load_dotenv()
-ApiKeyToken = os.getenv('APIKEY')
-BASE_URL = 'https://api.etherscan.io/api?'
-
-headerr = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-}
 
 def wrapper(func, queue):
     queue.put(func())
